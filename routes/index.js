@@ -25,7 +25,7 @@ exports.authcode = function(req, res) {
   var postOptions = {
     host : 'http://ddn4-test.apigee.net/v1/weather',
     port : 80,
-    path : '/oauth/token?grant_type=authorization_code&code=' + authcode + '&redirect_uri=http://faux-auth.herokuapp.com/authcode',
+    path : '/oauth/token?grant_type=authorization_code&code=' + authcode,
     method : 'POST',
     headers : postHeaders
   };
@@ -33,14 +33,14 @@ exports.authcode = function(req, res) {
   var reqPost = http.request(postOptions, function (resPost) {
     resPost.on('data', function(d) {
       // FIXME: temporary output
-      res.json(d);
+      res.json(d.toString());
     });
   });
 
   reqPost.write();
   reqPost.end();
   reqPost.on('error', function(e) {
-    res.json(e);
+    res.json(e.toString());
   });
 
   // save token (session?)
