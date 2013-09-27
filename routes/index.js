@@ -27,7 +27,7 @@ exports.authcode = function(req, res) {
   };
   var postOptions = {
     host : 'ddn4-test.apigee.net',
-    path : '/v1/weather/oauth/token',
+    path : '/v1/weather/oauth/token?' + parameters,
     port : 80,
     method : 'POST',
     headers : postHeaders
