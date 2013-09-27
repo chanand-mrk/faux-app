@@ -7,5 +7,5 @@ exports.login = function(req, res) {
 };
 
 exports.authcode = function(req, res) {
-  //
+  res.end("<h2>AUTHCODE</h2><br><p>Once this screen appears, build out</p>");
 };
