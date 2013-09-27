@@ -17,16 +17,23 @@ exports.authcode = function(req, res) {
 
   // post to token endpoint for access token
   var http = require('http');
-  var token = http.createClient(80, 'http://ddn4-test.apigee.net/v1/weather');
-  var request = token.request('POST', 'oauth/token', 
-    { 'Authorization': 'Basic ' + keyCode,
-      'grant_type': 'authorization_code',
-      'code': authcode });
-  request.end();
+  
+  var postHeaders = { 'Authorization': 'Basic ' + keyCode };
+  var postOptions = {
+    host : 'http://ddn4-test.apigee.net/v1/weather',
+    port : 80,
+    path : '/oauth/token?grant_type=authorization_code&code=' + authcode + '&scope=READ',
+    method : 'POST',
+    headers : postHeaders
+  };
 
-  request.on('response', function (tokenResponse) {
-    res.json(tokenResponse);
+  var reqPost = http.request(postOptions, function (resPost) {
+    resPost.on('data', function(d) {
+      // FIXME: temporary output
+      res.json(d);
+    });
   });
+
   // save token (session?)
   // display weather page
 };
