@@ -37,6 +37,12 @@ exports.authcode = function(req, res) {
     });
   });
 
+  reqPost.write();
+  reqPost.end();
+  reqPost.on('error', function(e) {
+    res.json(e);
+  });
+
   // save token (session?)
   // display weather page
 };
