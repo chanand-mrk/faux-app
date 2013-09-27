@@ -1,6 +1,6 @@
 var publicKey = '5safzW8a9GABvYJruE9bIgWAPR11guHT';
 var secretKey = 'mC4TTQlzmyjP2aVG';
-var keyCode = (new Buffer(publicKey + secretKey).toString('base64'));
+var keyCode = (new Buffer(publicKey + ':' + secretKey).toString('base64'));
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
