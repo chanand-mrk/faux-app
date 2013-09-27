@@ -18,11 +18,14 @@ exports.authcode = function(req, res) {
   // post to token endpoint for access token
   var http = require('http');
   
-  var postHeaders = { 'Authorization': 'Basic ' + keyCode };
+  var postHeaders = { 
+    'Authorization': 'Basic ' + keyCode,
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
   var postOptions = {
     host : 'http://ddn4-test.apigee.net/v1/weather',
     port : 80,
-    path : '/oauth/token?grant_type=authorization_code&code=' + authcode + '&scope=READ',
+    path : '/oauth/token?grant_type=authorization_code&code=' + authcode + '&redirect_uri=http://faux-auth.herokuapp.com/authcode'
     method : 'POST',
     headers : postHeaders
   };
