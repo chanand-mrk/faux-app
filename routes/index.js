@@ -37,7 +37,7 @@ exports.authcode = function(req, res) {
     });
   });
 
-  reqPost.write();
+  reqPost.write('');
   reqPost.end();
   reqPost.on('error', function(e) {
     res.json(e.toString());
