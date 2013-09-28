@@ -11,6 +11,16 @@ exports.login = function(req, res) {
                publicKey + '&response_type=code&scope=READ&state=foobar');
 };
 
+exports.weather = function(req, res) {
+  if (!req.session.access_token) {
+    console.log("ACCESS TOKEN: " + req.session.access_token);
+    console.log("REFRESH TOKEN: " + req.session.refresh_token);
+    res.redirect('/');
+  } else {
+    res.render('weather');
+  }
+};
+
 exports.authcode = function(req, res) {
   // parse authcode
   var authcode = req.query.code;
@@ -34,9 +44,20 @@ exports.authcode = function(req, res) {
   };
 
   var reqPost = http.request(postOptions, function (resPost) {
-    resPost.on('data', function(d) {
-      // FIXME: temporary output
-      res.json(d.toString());
+    var data = '';
+
+    resPost.on('data', function(chunk) {
+      data += chunk;
+    });
+
+    resPost.on('end', function() {
+      if (resPost.statusCode == 200) {
+        req.session.access_token = data.access_token;
+        req.session.refresh_token = data.refresh_token;
+        res.redirect('/weather');
+      } else {
+        res.end("<h1>" + resPost.statusCode + "</h1><p>" + data + "</p>");
+      }
     });
   });
 
@@ -46,7 +67,4 @@ exports.authcode = function(req, res) {
     console.log(e.stack);
     res.json(e);
   });
-
-  // save token (session?)
-  // display weather page
 };
