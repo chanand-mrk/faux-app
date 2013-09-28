@@ -53,6 +53,8 @@ exports.authcode = function(req, res) {
     resPost.on('end', function() {
       console.log("JSON DATA: " + jsonData);
       if (resPost.statusCode == 200) {
+        console.log("SET ACCESS TOKEN: " + jsonData.access_token);
+        console.log("SET REFRESH TOKEN: " + jsonData.refresh_token);
         req.session.access_token = jsonData.access_token;
         req.session.refresh_token = jsonData.refresh_token;
         res.redirect('/weather');
