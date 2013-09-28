@@ -17,7 +17,7 @@ exports.weather = function(req, res) {
   } else {
     res.render('weather', {
       access_token: req.session.access_token,
-      refresh_token: req.session.request_token
+      refresh_token: req.session.refresh_token
     });
   }
 };
