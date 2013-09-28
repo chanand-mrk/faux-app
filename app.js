@@ -13,6 +13,14 @@ app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.cookieSession({
+  secret: 'Zmx1ZmZ5IGJ1bm55IHNsaXBwZXJz',
+  cookie: {
+    path: '/',
+    maxAge: 3600000
+  }
+}));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,7 +34,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/login', routes.login);
 app.get('/authcode', routes.authcode);
-
+app.get('/weather', routes.weather);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
