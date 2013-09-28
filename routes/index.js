@@ -13,11 +13,12 @@ exports.login = function(req, res) {
 
 exports.weather = function(req, res) {
   if (!req.session.access_token) {
-    console.log("ACCESS TOKEN: " + req.session.access_token);
-    console.log("REFRESH TOKEN: " + req.session.refresh_token);
     res.redirect('/');
   } else {
-    res.render('weather');
+    res.render('weather', {
+      access_token: req.session.access_token,
+      refresh_token: req.session.request.token
+    });
   }
 };
 
@@ -54,8 +55,6 @@ exports.authcode = function(req, res) {
       console.log("JSON DATA: " + jsonString);
       if (resPost.statusCode == 200) {
         var jsonData = JSON.parse(jsonString);
-        console.log("SET ACCESS TOKEN: " + jsonData.access_token);
-        console.log("SET REFRESH TOKEN: " + jsonData.refresh_token);
         req.session.access_token = jsonData.access_token;
         req.session.refresh_token = jsonData.refresh_token;
         res.redirect('/weather');
