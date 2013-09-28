@@ -44,19 +44,20 @@ exports.authcode = function(req, res) {
   };
 
   var reqPost = http.request(postOptions, function (resPost) {
-    var data = '';
+    var jsonData = '';
 
     resPost.on('data', function(chunk) {
-      data += chunk;
+      jsonData += chunk;
     });
 
     resPost.on('end', function() {
+      console.log("JSON DATA: " + jsonData);
       if (resPost.statusCode == 200) {
-        req.session.access_token = data.access_token;
-        req.session.refresh_token = data.refresh_token;
+        req.session.access_token = jsonData.access_token;
+        req.session.refresh_token = jsonData.refresh_token;
         res.redirect('/weather');
       } else {
-        res.end("<h1>" + resPost.statusCode + "</h1><p>" + data + "</p>");
+        res.end("<h1>" + resPost.statusCode + "</h1><p>" + jsonData + "</p>");
       }
     });
   });
