@@ -1,6 +1,11 @@
-var publicKey = '5safzW8a9GABvYJruE9bIgWAPR11guHT';
-var secretKey = 'mC4TTQlzmyjP2aVG';
-var keyCode = (new Buffer(publicKey + ':' + secretKey).toString('base64'));
+var http = require('http');
+var request = require('request');
+
+var PUBLIC_KEY = '5safzW8a9GABvYJruE9bIgWAPR11guHT';
+var SECRET_KEY = 'mC4TTQlzmyjP2aVG';
+var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
+
+var WEATHER_API = 'http://ddn4-test.apigee.net/v1/weather/forecastrss';
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
@@ -8,16 +13,17 @@ exports.index = function(req, res) {
 
 exports.login = function(req, res) {
   res.redirect('http://ddn4-test.apigee.net/v1/weather/oauth/authorize?apikey=' +
-               publicKey + '&response_type=code&scope=READ&state=foobar');
+               PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
 exports.weather = function(req, res) {
   if (!req.session.access_token) {
     res.redirect('/');
   } else {
-    res.render('weather', {
-      access_token: req.session.access_token,
-      refresh_token: req.session.refresh_token
+    request(WEATHER_API + '?w=12761319', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        res.end(body)
+      }
     });
   }
 };
@@ -27,12 +33,10 @@ exports.authcode = function(req, res) {
   var authcode = req.query.code;
 
   // post to token endpoint for access token
-  var http = require('http');
-  
   var parameters = 'grant_type=authorization_code&code=' + authcode;
 
   var postHeaders = { 
-    'Authorization': 'Basic ' + keyCode,
+    'Authorization': 'Basic ' + KEY_CODE,
     'content-type': 'application/x-www-form-urlencoded',
     'content-length': parameters.length
   };
