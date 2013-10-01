@@ -1,4 +1,4 @@
 Faux App
 --------
 
-Simple web app for Oauth demo
+Simple web app for Oauth demo.
