@@ -20,7 +20,7 @@ exports.weather = function(req, res) {
   if (!req.session.access_token) {
     res.redirect('/');
   } else {
-    var url = WEATHER_API + '?w=12761319/';
+    var url = WEATHER_API + '?w=12761319';
     var headers = { Authorization : 'Bearer ' + req.session.access_token };
     request.get({url:url, headers:headers}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
