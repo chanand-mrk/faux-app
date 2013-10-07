@@ -1,8 +1,8 @@
 var http = require('http');
 var request = require('request');
 
-var PUBLIC_KEY = '5safzW8a9GABvYJruE9bIgWAPR11guHT';
-var SECRET_KEY = 'mC4TTQlzmyjP2aVG';
+var PUBLIC_KEY = '5nMAzqGAsoTRHVQXJfi2bCDYFyqPEGJ7';
+var SECRET_KEY = 'gyUFiAGrW8IG5GrX';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
 var WEATHER_API = 'http://ddn4-test.apigee.net/v1/weather/forecastrss';
