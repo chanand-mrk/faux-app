@@ -12,7 +12,7 @@ exports.index = function(req, res) {
 };
 
 exports.login = function(req, res) {
-  res.redirect('http://ddn4-test.apigee.net/v1/weather/oauth/authorize?apikey=' +
+  res.redirect('http://ddn4-test.apigee.net/v1/oauth2/authorize?apikey=' +
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
@@ -42,7 +42,7 @@ exports.authcode = function(req, res) {
   };
   var postOptions = {
     host : 'ddn4-test.apigee.net',
-    path : '/v1/weather/oauth/token',
+    path : '/v1/oauth2/token',
     port : 80,
     method : 'POST',
     headers : postHeaders
