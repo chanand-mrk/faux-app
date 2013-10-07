@@ -28,6 +28,7 @@ exports.weather = function(req, res) {
       } else {
         res.write("<h1>Error: " + response.statusCode + "</h1>");
         res.end("<p>" + error.message + "</p>");
+      }
     });
   }
 };
