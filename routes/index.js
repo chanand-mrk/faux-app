@@ -1,11 +1,11 @@
 var http = require('http');
 var request = require('request');
 
-var PUBLIC_KEY = '5nMAzqGAsoTRHVQXJfi2bCDYFyqPEGJ7';
-var SECRET_KEY = 'gyUFiAGrW8IG5GrX';
+var PUBLIC_KEY = 'Gm3viKqHkQRZ1wXChHFVBXQCl70Brfst';
+var SECRET_KEY = '0jmY3gxAiICOt4S3';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
-var WEATHER_API = 'http://ddn4-test.apigee.net/v1/weather/forecastrss';
+var WEATHER_API = 'http://ddn4-test.apigee.net/v1/faux-weather/forecastrss';
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
