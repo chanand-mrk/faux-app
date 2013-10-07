@@ -20,10 +20,14 @@ exports.weather = function(req, res) {
   if (!req.session.access_token) {
     res.redirect('/');
   } else {
-    request(WEATHER_API + '?w=12761319', function (error, response, body) {
+    var url = WEATHER_API + '?w=12761319/';
+    var headers = { Authorization : 'Bearer ' + req.session.access_token };
+    request.get({url:url, headers:headers}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
         res.end(body)
-      }
+      } else {
+        res.write("<h1>Error: " + response.statusCode + "</h1>");
+        res.end("<p>" + error.message + "</p>");
     });
   }
 };
