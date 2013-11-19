@@ -1,18 +1,18 @@
 var http = require('http');
 var request = require('request');
 
-var PUBLIC_KEY = 'Gm3viKqHkQRZ1wXChHFVBXQCl70Brfst';
-var SECRET_KEY = '0jmY3gxAiICOt4S3';
+var PUBLIC_KEY = 'X5SSvyurKvJGGiSfymWKDkauBxSzTxuf';
+var SECRET_KEY = 'iWCAlVrVoJKrqErr';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
-var WEATHER_API = 'http://ddn4-test.apigee.net/v1/faux-weather/forecastrss';
+var WEATHER_API = 'http://merck-prod.apigee.net/v1/faux-weather/forecastrss';
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
 };
 
 exports.login = function(req, res) {
-  res.redirect('http://ddn4-test.apigee.net/v1/oauth2/authorize?apikey=' +
+  res.redirect('http://merck-prod.apigee.net/v1/oauth2/authorize?apikey=' +
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
@@ -46,7 +46,7 @@ exports.authcode = function(req, res) {
     'content-length': parameters.length
   };
   var postOptions = {
-    host : 'ddn4-test.apigee.net',
+    host : 'merck-prod.apigee.net',
     path : '/v1/oauth2/token',
     port : 80,
     method : 'POST',
