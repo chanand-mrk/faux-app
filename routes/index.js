@@ -48,7 +48,7 @@ exports.authcode = function(req, res) {
   var postOptions = {
     host : 'webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com',
     path : '/v1/oauth2/token',
-    port : 9001,
+    port : 80,
     method : 'POST',
     headers : postHeaders
   };
