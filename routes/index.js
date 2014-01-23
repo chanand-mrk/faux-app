@@ -2,7 +2,7 @@ var http = require('http');
 var request = require('request');
 
 var PUBLIC_KEY = 'X5SSvyurKvJGGiSfymWKDkauBxSzTxuf';
-var SECRET_KEY = 'iWCAlVrVoJKrqErr';
+var SECRET_KEY = 'vIHf7uW8BrSP8mx8';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
 var WEATHER_API = 'http://webapi-dev-gateway.merck.com/v1/faux-weather/forecastrss';
