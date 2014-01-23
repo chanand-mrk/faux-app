@@ -48,7 +48,7 @@ exports.authcode = function(req, res) {
   var postOptions = {
     host : 'webapi-dev-gateway.merck.com',
     path : '/v1/oauth2/token',
-    port : 80,
+    //port : 80,
     method : 'POST',
     headers : postHeaders
   };
