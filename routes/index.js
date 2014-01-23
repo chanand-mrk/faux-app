@@ -5,7 +5,7 @@ var PUBLIC_KEY = 'iDoccgNWd8omEveAD1zpM7IdQ4oATmfX';
 var SECRET_KEY = 'vIHf7uW8BrSP8mx8';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
-var WEATHER_API = 'http://webapi-dev-gateway.merck.com/v1/faux-weather/forecastrss';
+var WEATHER_API = 'http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/faux-weather/forecastrss';
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
