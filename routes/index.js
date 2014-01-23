@@ -46,7 +46,7 @@ exports.authcode = function(req, res) {
     'content-length': parameters.length
   };
   var postOptions = {
-    host : 'merck-prod.apigee.net',
+    host : 'webapi-dev-gateway.merck.com',
     path : '/v1/oauth2/token',
     port : 80,
     method : 'POST',
