@@ -5,14 +5,14 @@ var PUBLIC_KEY = 'X5SSvyurKvJGGiSfymWKDkauBxSzTxuf';
 var SECRET_KEY = 'iWCAlVrVoJKrqErr';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
-var WEATHER_API = 'http://merck-prod.apigee.net/v1/faux-weather/forecastrss';
+var WEATHER_API = 'http://webapi-dev-gateway.merck.com/v1/faux-weather/forecastrss';
 
 exports.index = function(req, res) {
   res.render('index', { title: "Faux OAuth App" });
 };
 
 exports.login = function(req, res) {
-  res.redirect('http://merck-prod.apigee.net/v1/oauth2/authorize?apikey=' +
+  res.redirect('http://webapi-dev-gateway.merck.com/v1/oauth2/authorize?apikey=' +
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
