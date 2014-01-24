@@ -12,7 +12,7 @@ exports.index = function(req, res) {
 };
 
 exports.login = function(req, res) {
-  res.redirect('http://webapi-dev-gateway.merck.com/v1/oauth2/authorize?apikey=' +
+  res.redirect('http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/oauth2/authorize?apikey=' +
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
