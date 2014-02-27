@@ -66,7 +66,7 @@ exports.authcode = function(req, res) {
         var jsonData = JSON.parse(jsonString);
         req.session.access_token = jsonData.access_token;
         req.session.refresh_token = jsonData.refresh_token;
-        res.redirect('/weather');
+        res.redirect('/resource');
       } else {
         res.end("<h1>" + resPost.statusCode + "</h1><p>" + jsonString + "</p>");
       }
