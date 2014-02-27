@@ -1,8 +1,8 @@
 var http = require('http');
 var request = require('request');
 
-var PUBLIC_KEY = 'iDoccgNWd8omEveAD1zpM7IdQ4oATmfX';
-var SECRET_KEY = 'vIHf7uW8BrSP8mx8';
+var PUBLIC_KEY = 'hAkoAtG7YOS3DY61RsEQ2VXbH5Kk4mNG';
+var SECRET_KEY = 'kRyuIy45Wc5Jy3A5';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
 var WEATHER_API = 'http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/faux-weather/forecastrss';
@@ -12,7 +12,7 @@ exports.index = function(req, res) {
 };
 
 exports.login = function(req, res) {
-  res.redirect('http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/oauth2/authorize?apikey=' +
+  res.redirect('http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/tests/security/oauth2/authorize?apikey=' +
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
@@ -47,7 +47,7 @@ exports.authcode = function(req, res) {
   };
   var postOptions = {
     host : 'webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com',
-    path : '/v1/oauth2/token',
+    path : '/v1/tests/security/oauth2/token',
     port : 80,
     method : 'POST',
     headers : postHeaders
