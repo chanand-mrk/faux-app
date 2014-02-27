@@ -5,10 +5,10 @@ var PUBLIC_KEY = 'hAkoAtG7YOS3DY61RsEQ2VXbH5Kk4mNG';
 var SECRET_KEY = 'kRyuIy45Wc5Jy3A5';
 var KEY_CODE = (new Buffer(PUBLIC_KEY + ':' + SECRET_KEY).toString('base64'));
 
-var WEATHER_API = 'http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/faux-weather/forecastrss';
+var PROTECTED_RESOURCE_API = 'http://webapi-dev-gateway-ext-1832331230.us-east-1.elb.amazonaws.com/v1/tests/security/oauth2/protected-resource';
 
 exports.index = function(req, res) {
-  res.render('index', { title: "Faux OAuth App" });
+  res.render('index', { title: "Test OAuth2 Application" });
 };
 
 exports.login = function(req, res) {
@@ -16,11 +16,11 @@ exports.login = function(req, res) {
                PUBLIC_KEY + '&response_type=code&scope=READ&state=foobar');
 };
 
-exports.weather = function(req, res) {
+exports.resource = function(req, res) {
   if (!req.session.access_token) {
     res.redirect('/');
   } else {
-    var url = WEATHER_API + '?w=12761319';
+    var url = PROTECTED_RESOURCE_API;
     var headers = { Authorization : 'Bearer ' + req.session.access_token };
     request.get({url:url, headers:headers}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
